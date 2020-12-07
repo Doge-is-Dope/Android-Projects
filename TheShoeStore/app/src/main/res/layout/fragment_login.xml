@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="LoginViewModel"
+            type="com.udacity.shoestore.screens.login.LoginViewModel" />
     </data>
 
     <LinearLayout
@@ -22,9 +25,11 @@
             app:startIconDrawable="@drawable/ic_account">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:text="@{LoginViewModel.email}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -40,9 +45,11 @@
             app:startIconDrawable="@drawable/ic_password">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="@{LoginViewModel.password}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
