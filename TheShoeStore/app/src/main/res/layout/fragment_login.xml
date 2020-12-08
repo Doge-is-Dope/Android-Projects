@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/md_margin"
             android:layout_marginTop="@dimen/md_margin"
-            android:text="@string/login" />
+            android:text="@string/btn_login" />
 
         <Button
             android:id="@+id/btn_create"
@@ -68,6 +68,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/md_margin"
             android:layout_marginTop="@dimen/md_margin"
-            android:text="@string/create_account" />
+            android:text="@string/btn_create_account" />
     </LinearLayout>
 </layout>

@@ -5,8 +5,11 @@
 
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="create_account">Create Account</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_create_account">Create Account</string>
     <string name="welcome">Welcome</string>
-    <string name="get_started">get started</string>
+    <string name="btn_get_started">get started</string>
+    <string name="btn_continue">continue</string>
+    <string name="step2">step2</string>
+    <string name="step1">step1</string>
 </resources>
