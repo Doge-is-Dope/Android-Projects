@@ -12,4 +12,11 @@
     <string name="btn_continue">continue</string>
     <string name="step2">step2</string>
     <string name="step1">step1</string>
+    <string name="name">Name</string>
+    <string name="company">Company</string>
+    <string name="size">Size</string>
+    <string name="description">Description</string>
+    <string name="cancel">cancel</string>
+    <string name="save">save</string>
+    <string name="logout">Logout</string>
 </resources>
