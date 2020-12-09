@@ -2,8 +2,9 @@ package com.udacity.shoestore.screens.shoelist
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -22,11 +23,19 @@ class ShoeListFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shoe_list, container, false)
 
-        binding.fab.setOnClickListener(
+        binding.fabAdd.setOnClickListener(
             Navigation.createNavigateOnClickListener(
                 ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment()
             )
         )
+
+        val lparams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        val tv = TextView(context)
+        tv.layoutParams = lparams
+        tv.text = "test"
+        binding.linear.addView(tv)
 
         setHasOptionsMenu(true)
         return binding.root
