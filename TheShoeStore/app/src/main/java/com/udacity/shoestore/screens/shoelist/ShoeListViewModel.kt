@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udacity.shoestore.models.Shoe
+import timber.log.Timber
 
 class ShoeListViewModel : ViewModel() {
 
@@ -32,5 +33,6 @@ class ShoeListViewModel : ViewModel() {
 
     fun onSave(shoe: Shoe) {
         _shoeList.value?.add(shoe)
+        Timber.d(_shoeList.value.toString())
     }
 }

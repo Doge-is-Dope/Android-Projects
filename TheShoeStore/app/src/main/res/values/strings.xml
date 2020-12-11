@@ -14,8 +14,9 @@
     <string name="company">Company</string>
     <string name="size">Size</string>
     <string name="description">Description</string>
-    <string name="cancel">cancel</string>
     <string name="save">save</string>
     <string name="logout">Logout</string>
     <string name="add">add</string>
+
+    <string name="shoe_format_string">Name: %1$s, Size: %2$.1f, Company: %3$s, Desc: %4$s</string>
 </resources>
