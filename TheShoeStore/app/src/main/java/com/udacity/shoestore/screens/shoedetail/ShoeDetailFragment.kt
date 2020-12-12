@@ -20,7 +20,8 @@ import com.udacity.shoestore.screens.shoelist.ShoeListViewModel
 
 class ShoeDetailFragment : Fragment() {
 
-    private lateinit var viewModel: ShoeListViewModel
+    private lateinit var sharedViewModel: ShoeListViewModel
+    private lateinit var shoeViewModel: ShoeDetailViewModel
     private lateinit var binding: FragmentShoeDetailBinding
 
     override fun onCreateView(
@@ -29,19 +30,23 @@ class ShoeDetailFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shoe_detail, container, false)
 
-        viewModel = ViewModelProvider(requireActivity()).get(ShoeListViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(ShoeListViewModel::class.java)
+        shoeViewModel = ViewModelProvider(requireActivity()).get(ShoeDetailViewModel::class.java)
+
+        binding.viewModel = shoeViewModel
+        binding.lifecycleOwner = this
 
         binding.btnSave.setOnClickListener {
-            val name = binding.editName.text.toString()
-            val size =
-                if (binding.editSize.text.toString().isEmpty())
-                    "0"
-                else
-                    binding.editSize.text.toString()
-            val company = binding.editCompany.text.toString()
-            val description = binding.editDescription.text.toString()
-            val newShoe = Shoe(name, size.toDouble(), company, description)
-            viewModel.onSave(newShoe)
+//            val name = binding.editName.text.toString()
+//            val size =
+//                if (binding.editSize.text.toString().isEmpty())
+//                    "0"
+//                else
+//                    binding.editSize.text.toString()
+//            val company = binding.editCompany.text.toString()
+//            val description = binding.editDescription.text.toString()
+//            val newShoe = Shoe(name, size.toDouble(), company, description)
+            sharedViewModel.onSave(shoeViewModel.getShoeObject())
 
             val action =
                 ShoeDetailFragmentDirections

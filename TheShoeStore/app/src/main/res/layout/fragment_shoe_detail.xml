@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="ViewModel"
+            type="com.udacity.shoestore.screens.shoedetail.ShoeDetailViewModel" />
     </data>
 
 
@@ -27,6 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/md_margin"
+            android:text="@={ViewModel.shoeName}"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_name" />
@@ -46,6 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/md_margin"
+            android:text="@={ViewModel.shoeCompany}"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_company"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_company" />
@@ -66,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/md_margin"
             android:inputType="numberDecimal"
+            android:text="@={ViewModel.shoeSize}"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_size" />
@@ -84,6 +90,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/md_margin"
+            android:text="@={ViewModel.shoeDesc}"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_description" />
