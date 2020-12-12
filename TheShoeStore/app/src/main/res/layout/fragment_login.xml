@@ -10,6 +10,7 @@
             type="com.udacity.shoestore.screens.login.LoginViewModel" />
     </data>
 
+    <!-- LinearLayout is used for small amount of views with simple layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

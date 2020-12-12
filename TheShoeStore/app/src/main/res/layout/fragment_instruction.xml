@@ -6,6 +6,7 @@
 
     </data>
 
+    <!-- LinearLayout is used for small amount of views with simple layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,7 +27,7 @@
             android:id="@+id/btnContinue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_continue"/>
+            android:text="@string/btn_continue" />
 
     </LinearLayout>
 </layout>
