@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
@@ -49,15 +51,24 @@ class ShoeListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
-                || super.onOptionsItemSelected(item)
+        when (item.itemId) {
+            R.id.logout -> this.findNavController()
+                .navigate(ShoeListFragmentDirections.actionShoeListFragmentToLoginFragment())
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun addView(shoes: MutableList<Shoe>) {
         binding.linear.removeAllViews()
         for (shoe in shoes) {
             val textView = TextView(context)
-            textView.text = getString(R.string.shoe_format_string, shoe.name, shoe.size, shoe.company, shoe.description)
+            textView.text = getString(
+                R.string.shoe_format_string,
+                shoe.name,
+                shoe.size,
+                shoe.company,
+                shoe.description
+            )
             binding.linear.addView(textView)
         }
     }
