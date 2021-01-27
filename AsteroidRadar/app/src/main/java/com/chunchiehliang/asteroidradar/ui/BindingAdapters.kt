@@ -1,16 +1,34 @@
 package com.chunchiehliang.asteroidradar
 
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.chunchiehliang.asteroidradar.domain.Asteroid
 import com.chunchiehliang.asteroidradar.ui.main.AsteroidAdapter
+import com.chunchiehliang.asteroidradar.ui.main.AsteroidApiStatus
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
     val adapter = recyclerView.adapter as AsteroidAdapter
     adapter.submitList(data)
+}
+
+@BindingAdapter("asteroidApiStatus")
+fun bindStatus(progressBar: ProgressBar, status: AsteroidApiStatus?) {
+    when (status) {
+        AsteroidApiStatus.LOADING -> {
+            progressBar.visibility = View.VISIBLE
+        }
+        AsteroidApiStatus.ERROR -> {
+            progressBar.visibility = View.GONE
+        }
+        AsteroidApiStatus.DONE -> {
+            progressBar.visibility = View.GONE
+        }
+    }
 }
 
 @BindingAdapter("statusIcon")
