@@ -1,4 +1,4 @@
-package com.chunchiehliang.asteroidradar.api
+package com.chunchiehliang.asteroidradar.network
 
 import com.chunchiehliang.asteroidradar.domain.Asteroid
 import com.chunchiehliang.asteroidradar.utils.Constants
