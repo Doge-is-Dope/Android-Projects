@@ -1,7 +1,7 @@
 package com.chunchiehliang.asteroidradar.api
 
-import com.chunchiehliang.asteroidradar.Asteroid
-import com.chunchiehliang.asteroidradar.Constants
+import com.chunchiehliang.asteroidradar.domain.Asteroid
+import com.chunchiehliang.asteroidradar.utils.Constants
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*

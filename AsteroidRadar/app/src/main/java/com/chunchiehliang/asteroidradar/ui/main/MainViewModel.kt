@@ -1,10 +1,10 @@
-package com.chunchiehliang.asteroidradar.main
+package com.chunchiehliang.asteroidradar.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.chunchiehliang.asteroidradar.Asteroid
+import com.chunchiehliang.asteroidradar.domain.Asteroid
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {

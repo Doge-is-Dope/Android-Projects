@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.chunchiehliang.asteroidradar.main.MainViewModel" />
+            type="com.chunchiehliang.asteroidradar.ui.main.MainViewModel" />
 
     </data>
 

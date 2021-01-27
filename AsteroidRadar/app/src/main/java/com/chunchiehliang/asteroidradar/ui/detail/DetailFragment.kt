@@ -1,4 +1,4 @@
-package com.chunchiehliang.asteroidradar.detail
+package com.chunchiehliang.asteroidradar.ui.detail
 
 
 import android.os.Bundle

@@ -1,12 +1,11 @@
-package com.chunchiehliang.asteroidradar.main
+package com.chunchiehliang.asteroidradar.ui.main
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.chunchiehliang.asteroidradar.Asteroid
+import com.chunchiehliang.asteroidradar.domain.Asteroid
 import com.chunchiehliang.asteroidradar.databinding.ItemAsteroidBinding
 
 class AsteroidAdapter(val onClickListener: OnClickListener) :

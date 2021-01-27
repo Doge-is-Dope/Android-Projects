@@ -1,4 +1,4 @@
-package com.chunchiehliang.asteroidradar
+package com.chunchiehliang.asteroidradar.utils
 
 object Constants {
     const val API_QUERY_DATE_FORMAT = "YYYY-MM-dd"

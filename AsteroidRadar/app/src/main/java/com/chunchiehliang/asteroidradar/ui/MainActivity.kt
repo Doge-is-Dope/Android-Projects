@@ -1,7 +1,8 @@
-package com.chunchiehliang.asteroidradar
+package com.chunchiehliang.asteroidradar.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.chunchiehliang.asteroidradar.R
 
 class MainActivity : AppCompatActivity() {
 

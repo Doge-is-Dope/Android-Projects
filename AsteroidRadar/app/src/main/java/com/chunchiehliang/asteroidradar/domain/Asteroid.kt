@@ -1,4 +1,4 @@
-package com.chunchiehliang.asteroidradar
+package com.chunchiehliang.asteroidradar.domain
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
