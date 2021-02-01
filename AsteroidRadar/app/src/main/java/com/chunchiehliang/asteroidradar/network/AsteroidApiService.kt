@@ -1,5 +1,6 @@
 package com.chunchiehliang.asteroidradar.network
 
+import com.chunchiehliang.asteroidradar.domain.PictureOfDay
 import com.chunchiehliang.asteroidradar.utils.Constants.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -28,6 +29,9 @@ interface AsteroidApiService {
         @Query("end_date") endDate: String,
         @Query("api_key") apiKey: String,
     ): Call<String>
+
+    @GET("planetary/apod")
+    suspend fun getPictureOfDay(@Query("api_key") apiKey: String): PictureOfDay
 }
 
 

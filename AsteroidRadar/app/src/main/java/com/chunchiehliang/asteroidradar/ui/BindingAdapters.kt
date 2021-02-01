@@ -4,8 +4,11 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.chunchiehliang.asteroidradar.domain.Asteroid
 import com.chunchiehliang.asteroidradar.ui.main.AsteroidAdapter
 import com.chunchiehliang.asteroidradar.ui.main.AsteroidApiStatus
@@ -28,6 +31,22 @@ fun bindStatus(progressBar: ProgressBar, status: AsteroidApiStatus?) {
         AsteroidApiStatus.DONE -> {
             progressBar.visibility = View.GONE
         }
+    }
+}
+
+@BindingAdapter("imageUrl")
+fun bindImage(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+
+        val sharedOptions: RequestOptions = RequestOptions()
+            .placeholder(R.drawable.placeholder_picture_of_day)
+
+        Glide.with(imgView.context)
+            .load(imgUri)
+            .placeholder(R.drawable.placeholder_picture_of_day)
+            .apply(sharedOptions)
+            .into(imgView)
     }
 }
 
