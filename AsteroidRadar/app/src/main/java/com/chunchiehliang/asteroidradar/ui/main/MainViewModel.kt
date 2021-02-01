@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chunchiehliang.asteroidradar.domain.Asteroid
 import com.chunchiehliang.asteroidradar.network.Network
-import kotlinx.coroutines.delay
+import com.chunchiehliang.asteroidradar.network.parseAsteroidsJsonResult
+import com.chunchiehliang.asteroidradar.utils.getSevenDaysLaterFormattedDate
+import com.chunchiehliang.asteroidradar.utils.getTodayFormattedDate
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,38 +37,28 @@ class MainViewModel : ViewModel() {
         get() = _navigateToSelectedAsteroid
 
     init {
-        // todo: this is for testing
-//        getAsteroidList()
-        getAsteroids()
+        val startDate = getTodayFormattedDate()
+        val endDate = getSevenDaysLaterFormattedDate()
+        Timber.d("startDate: $startDate, endDate: $endDate")
+        getAsteroids(startDate, endDate)
     }
 
-    private fun getAsteroidList() {
-        viewModelScope.launch {
-            _status.value = AsteroidApiStatus.LOADING
-            try {
-//                delay(2000)
-//                _asteroidList.value = Network.retrofitService.getAsteroids("2015-09-07", "2015-09-08", "DEMO_KEY")
-                _status.value = AsteroidApiStatus.DONE
-            } catch (e: Exception) {
-                Timber.e("Error: $e")
-                _status.value = AsteroidApiStatus.ERROR
-                _asteroidList.value = ArrayList()
-            }
-        }
-    }
-
-    private fun getAsteroids() {
-        _response.value = "Loading..."
+    private fun getAsteroids(startDate: String, endDate: String) {
+        _status.value = AsteroidApiStatus.LOADING
         viewModelScope.launch {
 
-            Network.retrofitService.getAsteroids("2015-09-07", "2015-09-08", "DEMO_KEY")
+            Network.retrofitService.getAsteroids(startDate, endDate, "DEMO_KEY")
                 .enqueue(object : Callback<String> {
                     override fun onFailure(call: Call<String>, t: Throwable) {
-                        _response.value = "Failure: " + t.message
+                        Timber.e("Failure: ${t.message}")
+                        _status.value = AsteroidApiStatus.ERROR
+                        _asteroidList.value = ArrayList()
                     }
 
                     override fun onResponse(call: Call<String>, response: Response<String>) {
-                        _response.value = response.body()
+                        _asteroidList.value =
+                            parseAsteroidsJsonResult(JSONObject(response.body()!!))
+                        _status.value = AsteroidApiStatus.DONE
                     }
                 })
         }
