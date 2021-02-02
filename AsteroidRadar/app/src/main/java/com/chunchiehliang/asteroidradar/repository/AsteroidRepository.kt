@@ -1,6 +1,7 @@
 package com.chunchiehliang.asteroidradar.repository
 
 import androidx.lifecycle.LiveData
+import com.chunchiehliang.asteroidradar.BuildConfig
 import com.chunchiehliang.asteroidradar.database.AsteroidDatabase
 import com.chunchiehliang.asteroidradar.domain.Asteroid
 import com.chunchiehliang.asteroidradar.domain.PictureOfDay
@@ -20,7 +21,7 @@ import timber.log.Timber
 import java.lang.Exception
 
 
-const val API_KEY = "DEMO_KEY"
+const val API_KEY = BuildConfig.API_KEY
 
 class AsteroidRepository(private val database: AsteroidDatabase) {
 
