@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:contentDescription="@{viewModel.pictureOfDay.title}"
+                android:contentDescription="@{viewModel.pictureOfDay == null ? @string/this_is_nasa_s_picture_of_day_showing_nothing_yet : String.format(@string/nasa_picture_of_day_content_description_format, viewModel.pictureOfDay.title)}"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{viewModel.pictureOfDay.url}"
                 app:srcCompat="@drawable/placeholder_picture_of_day" />
