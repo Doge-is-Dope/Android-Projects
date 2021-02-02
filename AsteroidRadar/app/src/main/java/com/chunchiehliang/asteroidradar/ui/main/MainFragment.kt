@@ -12,7 +12,14 @@ import com.chunchiehliang.asteroidradar.databinding.FragmentMainBinding
 class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onViewCreated()"
+        }
+        ViewModelProvider(
+            this,
+            MainViewModel.Factory(activity.application)
+        ).get(MainViewModel::class.java)
+
     }
 
     override fun onCreateView(
@@ -25,7 +32,7 @@ class MainFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        binding.asteroidRecycler.adapter = AsteroidAdapter(AsteroidAdapter.OnClickListener{
+        binding.asteroidRecycler.adapter = AsteroidAdapter(AsteroidAdapter.OnClickListener {
             viewModel.displayAsteroidDetails(it)
         })
 

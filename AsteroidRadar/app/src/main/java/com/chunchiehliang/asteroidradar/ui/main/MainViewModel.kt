@@ -1,13 +1,14 @@
 package com.chunchiehliang.asteroidradar.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
+import com.chunchiehliang.asteroidradar.database.getDatabase
 import com.chunchiehliang.asteroidradar.domain.Asteroid
 import com.chunchiehliang.asteroidradar.domain.PictureOfDay
 import com.chunchiehliang.asteroidradar.network.Network
 import com.chunchiehliang.asteroidradar.network.parseAsteroidsJsonResult
+import com.chunchiehliang.asteroidradar.repository.API_KEY
+import com.chunchiehliang.asteroidradar.repository.AsteroidRepository
 import com.chunchiehliang.asteroidradar.utils.getSevenDaysLaterFormattedDate
 import com.chunchiehliang.asteroidradar.utils.getTodayFormattedDate
 import kotlinx.coroutines.delay
@@ -20,69 +21,40 @@ import timber.log.Timber
 
 enum class AsteroidApiStatus { LOADING, ERROR, DONE }
 
-const val API_KEY = "DEMO_KEY"
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-class MainViewModel : ViewModel() {
-
-    private val _status = MutableLiveData<AsteroidApiStatus>()
+    private val _status = MediatorLiveData<AsteroidApiStatus>()
     val status: LiveData<AsteroidApiStatus>
         get() = _status
-
-    private val _response = MutableLiveData<String>()
-    val response: LiveData<String>
-        get() = _response
 
     private val _pictureOfDay = MutableLiveData<PictureOfDay>()
     val pictureOfDay: LiveData<PictureOfDay>
         get() = _pictureOfDay
 
-    private val _asteroidList = MutableLiveData<List<Asteroid>>()
-    val asteroidList: LiveData<List<Asteroid>>
-        get() = _asteroidList
-
     private val _navigateToSelectedAsteroid = MutableLiveData<Asteroid>()
     val navigateToSelectedAsteroid: LiveData<Asteroid>
         get() = _navigateToSelectedAsteroid
 
+    private val database = getDatabase(application)
+
+    private val asteroidRepository = AsteroidRepository(database)
+
+    val asteroidList = asteroidRepository.asteroids
+
     init {
-        val startDate = getTodayFormattedDate()
-        val endDate = getSevenDaysLaterFormattedDate()
-        Timber.d("startDate: $startDate, endDate: $endDate")
-        getAsteroids(startDate, endDate)
-        getPictureOfDay()
-    }
+        displayPictureOfDay()
 
-    private fun getAsteroids(startDate: String, endDate: String) {
-        _status.value = AsteroidApiStatus.LOADING
         viewModelScope.launch {
-
-            Network.retrofitService.getAsteroids(startDate, endDate, API_KEY)
-                .enqueue(object : Callback<String> {
-                    override fun onFailure(call: Call<String>, t: Throwable) {
-                        Timber.e("Failure: ${t.message}")
-                        _status.value = AsteroidApiStatus.ERROR
-                        _asteroidList.value = ArrayList()
-                    }
-
-                    override fun onResponse(call: Call<String>, response: Response<String>) {
-                        Timber.d("response: $response")
-                        val body = response.body()
-                        if (body != null) {
-                            _asteroidList.value =
-                                parseAsteroidsJsonResult(JSONObject(body))
-                        }
-                        _status.value = AsteroidApiStatus.DONE
-                    }
-                })
+            asteroidRepository.refreshAsteroids()
         }
     }
 
-    private fun getPictureOfDay() {
+    private fun displayPictureOfDay() {
         viewModelScope.launch {
             try {
-                val pictureOfDay = Network.retrofitService.getPictureOfDay(API_KEY)
+                val pictureOfDay = asteroidRepository.getPictureOfDay()
                 Timber.d("picture of day: $pictureOfDay")
-                if (pictureOfDay.mediaType == "image") {
+                if (pictureOfDay?.mediaType == "image") {
                     _pictureOfDay.value = pictureOfDay
                 } else {
                     _pictureOfDay.value = null
@@ -100,5 +72,15 @@ class MainViewModel : ViewModel() {
 
     fun displayAsteroidDetailsComplete() {
         _navigateToSelectedAsteroid.value = null
+    }
+
+    class Factory(val app: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return MainViewModel(app) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
+        }
     }
 }

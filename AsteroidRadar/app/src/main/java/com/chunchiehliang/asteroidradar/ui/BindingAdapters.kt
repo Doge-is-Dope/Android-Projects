@@ -1,4 +1,4 @@
-package com.chunchiehliang.asteroidradar
+package com.chunchiehliang.asteroidradar.ui
 
 import android.view.View
 import android.widget.ImageView
@@ -9,6 +9,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.chunchiehliang.asteroidradar.R
 import com.chunchiehliang.asteroidradar.domain.Asteroid
 import com.chunchiehliang.asteroidradar.ui.main.AsteroidAdapter
 import com.chunchiehliang.asteroidradar.ui.main.AsteroidApiStatus

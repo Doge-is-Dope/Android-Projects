@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.chunchiehliang.asteroidradar.domain.Asteroid
 
-@Database(entities = [Asteroid::class], version = 1)
+@Database(entities = [Asteroid::class], version = 1, exportSchema = false)
 abstract class AsteroidDatabase : RoomDatabase() {
     abstract val asteroidDao: AsteroidDao
 }

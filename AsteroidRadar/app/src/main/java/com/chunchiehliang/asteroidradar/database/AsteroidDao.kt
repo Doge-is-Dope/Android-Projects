@@ -9,9 +9,9 @@ import com.chunchiehliang.asteroidradar.domain.Asteroid
 
 @Dao
 interface AsteroidDao {
-    @Query("select * from asteroid")
+    @Query("select * from asteroid order by closeApproachDate ")
     fun getAsteroids(): LiveData<List<Asteroid>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg videos: Asteroid)
+    fun insertAll(asteroids: List<Asteroid>)
 }
