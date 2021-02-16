@@ -17,6 +17,18 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
+            android:id="@+id/text_file_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_spacing"
+            android:layout_marginTop="@dimen/normal_spacing"
+            android:layout_marginEnd="@dimen/normal_spacing"
+            android:alpha="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
             android:id="@+id/text_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -31,6 +43,19 @@
 
 
     <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/text_file_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_spacing"
+            android:layout_marginTop="@dimen/normal_spacing"
+            android:layout_marginEnd="@dimen/normal_spacing"
+            android:alpha="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Constraint
             android:id="@+id/text_status"
             android:layout_width="0dp"
