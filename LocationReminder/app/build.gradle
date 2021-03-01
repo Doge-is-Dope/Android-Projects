@@ -119,6 +119,7 @@ dependencies {
 
 
     //Maps & Geofencing
+    implementation 'com.google.android.libraries.maps:maps:3.1.0-beta'
     implementation "com.google.android.gms:play-services-location:$playServicesVersion"
     implementation "com.google.android.gms:play-services-maps:$playServicesVersion"
 
