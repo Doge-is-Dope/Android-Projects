@@ -124,5 +124,9 @@ dependencies {
 
     // Firebase Authentication library
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
-    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
+
+    // Timber logging
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
