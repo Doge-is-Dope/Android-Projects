@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -29,12 +30,12 @@
 
         <Button
             android:id="@+id/btn_save"
-            android:text="@string/save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/colorAccent"
             android:layout_margin="@dimen/margin_normal"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/save"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
