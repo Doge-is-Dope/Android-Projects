@@ -184,7 +184,7 @@ class SaveReminderFragment : BaseFragment() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.geofence_permission_rationale_title))
             .setMessage(getString(R.string.geofence_permission_rationale_message))
-            .setPositiveButton(getString(R.string.geofence_permission_rationale_ok)) { dialog, which ->
+            .setPositiveButton(getString(R.string.ok)) { dialog, which ->
                 requestBackgroundPermissionForGeofence()
             }
         builder.create().show()
