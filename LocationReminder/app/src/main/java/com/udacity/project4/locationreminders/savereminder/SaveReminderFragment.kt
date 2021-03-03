@@ -220,8 +220,8 @@ class SaveReminderFragment : BaseFragment() {
                 Timber.d("Success! id: ${geofence.requestId}")
             }
             .addOnFailureListener {
-                if ((it.message != null)) {
-                    Timber.w(it.message!!)
+                if (it.message != null) {
+                    Timber.e("Failure! ${it.message!!}")
                 }
             }
     }
