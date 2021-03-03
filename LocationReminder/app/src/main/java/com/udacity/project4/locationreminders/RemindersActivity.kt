@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.udacity.project4.R
 import com.udacity.project4.authentication.AuthenticationActivity
@@ -25,17 +27,8 @@ class RemindersActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.logout -> {
-                AuthUI.getInstance().signOut(this).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        val intent = Intent(this, AuthenticationActivity::class.java)
-                        intent.addFlags(
-                            Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    or Intent.FLAG_ACTIVITY_NEW_TASK
-                        )
-                        startActivity(intent)
-                    }
-                }
+            android.R.id.home -> {
+                findNavController(R.id.nav_host_fragment).popBackStack()
                 return true
             }
         }

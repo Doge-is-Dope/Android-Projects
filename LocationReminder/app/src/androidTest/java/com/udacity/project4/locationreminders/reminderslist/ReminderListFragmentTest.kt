@@ -15,6 +15,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.udacity.project4.R
 import com.udacity.project4.locationreminders.data.ReminderDataSource
+import com.udacity.project4.locationreminders.data.local.LocalDB
+import com.udacity.project4.locationreminders.data.local.RemindersLocalRepository
+import com.udacity.project4.locationreminders.savereminder.SaveReminderViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -22,8 +25,12 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.inject
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
+import org.koin.dsl.module
 import org.koin.test.KoinTest
+import org.koin.test.get
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 
@@ -35,9 +42,9 @@ import org.mockito.Mockito.verify
 class ReminderListFragmentTest : KoinTest {
 
 
-    val dataSource by inject<ReminderDataSource>()
+    private lateinit var repository: ReminderDataSource
 
-    private lateinit var application: Application
+    private lateinit var appContext: Application
 
 
     @get:Rule
@@ -45,26 +52,29 @@ class ReminderListFragmentTest : KoinTest {
 
     @Before
     fun setup() = runBlocking {
-//        val reminder1 = ReminderDTO(
-//            "title1", "description1", "location1", 1.1, 1.1, "android"
-//        )
-//        val reminder2 = ReminderDTO(
-//            "title2", "description2", "location2", 2.2, 2.2, "awesome"
-//        )
-//
-//        dataSource.saveReminder(reminder1)
-//        dataSource.saveReminder(reminder2)
-        application = ApplicationProvider.getApplicationContext()
-    }
+        stopKoin()
 
-    @After
-    fun clearUp() = runBlocking {
-        dataSource.deleteAllReminders()
+        appContext = ApplicationProvider.getApplicationContext()
+
+        val myModule = module {
+            viewModel { RemindersListViewModel(appContext, get() as ReminderDataSource) }
+            single { SaveReminderViewModel(appContext, get() as ReminderDataSource) }
+            single { RemindersLocalRepository(get()) as ReminderDataSource }
+            single { LocalDB.createRemindersDao(appContext) }
+        }
+        //declare a new koin module
+        startKoin {
+            modules(listOf(myModule))
+        }
+
+        repository = get()
+
+
+        repository.deleteAllReminders()
     }
 
     @Test
     fun reminderList_displayNoData() {
-
         val scenario = launchFragmentInContainer<ReminderListFragment>(Bundle(), R.style.AppTheme)
 
         val navController = mock(NavController::class.java)
@@ -73,7 +83,7 @@ class ReminderListFragmentTest : KoinTest {
         }
 
         onView(withId(R.id.noDataTextView)).check(matches(isDisplayed()))
-        onView(withId(R.id.noDataTextView)).check(matches(withText(application.getString(R.string.no_data))))
+        onView(withId(R.id.noDataTextView)).check(matches(withText(appContext.getString(R.string.no_data))))
     }
 
 
