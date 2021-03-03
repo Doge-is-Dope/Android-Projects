@@ -40,4 +40,9 @@
     <string name="geofence_too_many_geofences">Your app has registered too many geofences.</string>
     <string name="geofence_too_many_pending_intents">You have provided too many PendingIntents to the addGeofences() call.</string>
     <string name="error_adding_geofence">Error Happened, Can\'t Add Geofence</string>
+
+    <!-- permission rationale-->
+    <string name="geofence_permission_rationale_title">We need the background location permission</string>
+    <string name="geofence_permission_rationale_message">The background location permission is used to remind you at a specific location</string>
+    <string name="geofence_permission_rationale_ok">Ok</string>
 </resources>
