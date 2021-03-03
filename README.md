@@ -7,3 +7,4 @@ This is the repository for practicing Modern Android Development (MAD) Skills. A
 - Shoe Store: ViewModel, LiveData, Navigation, Data Binding, Material Design Components
 - Asteroid Radar: ViewModel, LiveData, Navigation, Data Binding, Material Design Components, Room
 - LoadApp: Notification, Custom View, Animation, MotionLayout
+- LocationReminder: Map SDK, Geofencing SDK, Testing(ViewModel, LiveData, Coroutine, Doubles, Room, End-to-end)
